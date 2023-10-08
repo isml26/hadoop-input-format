@@ -10,7 +10,6 @@
 
 * hdfs dfsadmin -safemode leave
 
-
 * hadoop fs -mkdir /input
 * hadoop fs -rm -r /output
 * hadoop fs -put C:\Users\Dell\Desktop\OpenSans-Regular.bin \input
@@ -30,6 +29,23 @@
 
 * In newer versions of Hadoop, the "workers" file has replaced the "slaves" file
 
+<hr>
+
+### By using below command inspect result
+* hadoop fs -cat /output/part-r-00000
+<hr>
+
+### By using below command copy to current dir
+* hadoop fs -cat /output/part-r-00000 > output.txt
+<hr>
+
+### To download a file from the Hadoop Distributed File System (HDFS) to your local PC in the Hadoop ecosystem, you can use the hadoop fs -get command. Here's how to do it:
+* hadoop fs -get /hdfs/path/to/output.txt local/path/to/output.txt
+<hr>
+
+### To inspect the content using the vi text editor, you can pipe the output of the hadoop fs -cat command into vi. Here's how you can do it:
+* hadoop fs -cat /output/part-r-00000 | vi -
+<hr>
 
 * hadoop fs -mkdir /input
 * hadoop fs -ls /input

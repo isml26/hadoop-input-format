@@ -2,11 +2,11 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.*;
+import java.io.*;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
-import java.io.*;
-
 public class CustomBinaryRecordReader extends RecordReader<Text, LongWritable> {
+
     private FileSplit fileSplit;
     private Configuration conf;
     private boolean processed = false;
@@ -25,23 +25,37 @@ public class CustomBinaryRecordReader extends RecordReader<Text, LongWritable> {
         if (!processed) {
             Path file = fileSplit.getPath();
             FileSystem fs = file.getFileSystem(conf);
-            try (FSDataInputStream in = fs.open(file);
-                 BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-                String line;
-                long logEntryCount = 0;
-                while ((line = reader.readLine()) != null) {
-                    // Your custom logic to parse binary data goes here
-                    // In this example, we count the number of log entries in the binary file
-                    // Modify this part to fit your binary data format
-                    logEntryCount++;
+            try (FSDataInputStream in = fs.open(file)) {
+
+                // Read 24 bytes at a time
+                byte[] bytes = new byte[24];
+                int bytesRead = in.read(bytes);
+                while (bytesRead > 0) {
+
+                    // Create a hexadecimal string from the bytes
+                    String hexString = byteArrayToHexString(bytes);
+
+                    // Set the key and value
+                    key.set(hexString);
+                    value.set(1L);
+
+                    // Read the next 24 bytes
+                    bytesRead = in.read(bytes);
                 }
-                key.set(file.getName());
-                value.set(logEntryCount);
             }
             processed = true;
             return true;
         }
         return false;
+    }
+
+    // Helper method to convert a byte array to a hexadecimal string
+    private String byteArrayToHexString(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02X ", b));
+        }
+        return sb.toString().trim();
     }
 
     @Override
