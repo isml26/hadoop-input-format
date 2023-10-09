@@ -29,6 +29,8 @@
 
 * In newer versions of Hadoop, the "workers" file has replaced the "slaves" file
 
+#### format3 -> read 10bytes convert them to hex string and perform map-reduce
+
 <hr>
 
 ### By using below command inspect result
