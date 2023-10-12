@@ -49,7 +49,51 @@
 * hadoop fs -cat /output/part-r-00000 | vi -
 <hr>
 
+### Example flow of to execute job
 * hadoop fs -mkdir /input
-* hadoop fs -ls /input
 * hadoop fs -put OpenSans-Regular.bin /input/
-* hadoop jar binarymapper.jar com/demo/deneme/BinaryFileProcessing2 /input /output
+* hadoop fs -ls /input
+* hadoop jar binarymapper.jar demo/BinaryFileProcess /input /output
+
+
+<hr>
+
+## Table of Contents
+- [RecordReader](#recordreader)
+- [Mapper](#mapper)
+- [Reducer](#reducer)
+
+
+### RecordReader
+
+The RecordReader class is responsible for reading the input data and converting it into key-value pairs. The RecordReader class is specific to the input format that is being used. For example, the TextInputFormat class uses a LineRecordReader class to read the input data line by line.
+
+### Mapper
+
+ The Mapper class is responsible for processing the key-value pairs from the RecordReader class and producing a new set of key-value pairs. The Mapper class can perform any type of processing on the input data, such as filtering, aggregating, or transforming the data.
+
+### Reducer
+
+The Reducer class is responsible for aggregating the key-value pairs from the Mapper class and producing the final output. The Reducer class typically performs a single operation on the input data, such as counting the number of occurrences of each key or finding the maximum value for each key.
+
+
+
+ +----------------+
+                               |  RecordReader  |
+                               +----------------+
+                                    |
+                                    |
+                                    V
+                       +---------------------------+
+                       |                           |
+                       |            Mapper            |
+                       |                           |
+                       +---------------------------+
+                                    |
+                                    |
+                                    V
+                       +---------------------------+
+                       |                           |
+                       |            Reducer            |
+                       |                           |
+                       +---------------------------+

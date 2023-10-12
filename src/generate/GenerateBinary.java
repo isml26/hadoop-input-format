@@ -8,7 +8,7 @@ import java.util.Random;
 public class GenerateBinary {
 
 	 public static void main(String[] args) {
-	        String filename = "page_data_random.bin";
+	        String filename = "random2.bin";
 //	        long fileSize = 2L * 1024 * 1024 * 1024; // 2GB
 	        long fileSize = 200L * 1024 * 1024; // 200MB
 	        Random random = new Random();
