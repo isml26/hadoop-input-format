@@ -9,7 +9,10 @@
 * https://issues.apache.org/jira/browse/YARN-8246
 
 * hdfs dfsadmin -safemode leave
-
+* hadoop fs -du -s -h /output
+* hadoop fs -copyToLocal /output /local_dir
+* hadoop fs -copyToLocal -p hdfs://localhost:9000/output D:/
+* hadoop fs -cat /output/part-r-00000 | wc -l (number of lines)
 * hadoop fs -mkdir /input
 * hadoop fs -rm -r /output
 * hadoop fs -put C:\Users\Dell\Desktop\OpenSans-Regular.bin \input
