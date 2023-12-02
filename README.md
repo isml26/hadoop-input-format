@@ -100,3 +100,10 @@ The Reducer class is responsible for aggregating the key-value pairs from the Ma
                        |            Reducer            |
                        |                           |
                        +---------------------------+
+
+
+
+![mapred](https://github.com/isml26/hadoop-input-format/assets/62605922/ac559847-28fc-46a7-93fd-dfb276138efe)
+
+
+![map-red](https://github.com/isml26/hadoop-input-format/assets/62605922/886818a9-b07d-4978-b3f2-9ac5deebcd74)
